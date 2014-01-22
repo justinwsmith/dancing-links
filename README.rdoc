@@ -1,0 +1,46 @@
+This module provides an implementation of the "dancing links" algorhthm
+to solve the "exact cover" problem.
+
+The "exact cover" problem:
+- Given a set of vectors containing 0's and 1's:
+- Find a subset of these vectors that collectively contain one and only one 1 in each and every column.
+
+For example the follwing set of vectors:
+- A = [ 0, 1, 0]
+- B = [ 1, 1, 0]
+- C = [ 1, 0, 0]
+- D = [ 0, 0, 1]
+
+Has two solutions:
+- A = [ 0, 1, 0]
+- C = [ 1, 0, 0]
+- D = [ 0, 0, 1]
+
+and
+- B = [ 1, 1, 0]
+- D = [ 0, 0, 1]
+
+A better description of the problem can be found here:
+http://en.wikipedia.org/wiki/Exact_cover
+
+The "dancing links" algorithm is a commonly used solution for this problem and
+was found by Donald Knuth.  The algorithm involves the construction of a
+sparse matrix containing nodes that are doubly-linked both horizontally and
+vertically.  The matrix itself simply facilitates the depth-first search
+(aka backtracking) part of the algorithm.
+
+The importance of the doubly-linked nodes are that they allow for quick
+removal/restoration of rows/columns of nodes, which is exactly what a
+backtracking algorithm for the "exact cover" problem needs.
+
+horizontal removal:
+- node.left.right = node.right
+- node.right.left = node.left
+
+horizontal restoration:
+- node.left.right = node
+- node.right.left = node
+
+A better description of the algorithm can be found here:
+http://en.wikipedia.org/wiki/Dancing_Links
+
